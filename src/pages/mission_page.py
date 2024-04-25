@@ -15,7 +15,6 @@ class MissionPage(BasePage):
     ### URLS ###
     home_url = "https://www.tacaoplayumusic.com/"
     login_url = "https://www.tacaoplayumusic.com/api/v1/spotify/login?to=redirect"
-    profile_url = "https://www.tacaoplayumusic.com/perfil"
 
     ### LOCATORS ###
     btn_login_locator = (By.XPATH, "//a[@href='/api/v1/spotify/login?to=redirect']")
@@ -46,7 +45,7 @@ class MissionPage(BasePage):
             self.logger_decorated.info("MISSÃO DISPONÍVEL")
             try:
                 self.wait_visible_element(3, self.modal_mission_locator)
-                self.logger.error("Ops! A missão de hoje já foi realizada!")
+                self.logger.error("Ops! A missão de hoje já foi realizada! Tente novamente amanhã!")
                 raise RuntimeError()
             except (TimeoutException, NoSuchElementException) as e:
                 self.logger.info(game.upper())
@@ -81,7 +80,6 @@ class MissionPage(BasePage):
         self.logger.info(f"- {answer}")
 
     def get_total_coins(self):
-        self.webdriver.get(self.profile_url)
         coins = self.wait_presence_element(5, self.total_coins_locator).text
         self.logger_decorated.info("SALDO TOTAL")
         self.logger.info(coins)

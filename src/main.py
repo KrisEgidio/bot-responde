@@ -21,6 +21,7 @@ def config_webdriver():
 
 def main():
     driver = config_webdriver()
+    driver.maximize_window()
     mission_page = MissionPage(driver)
 
     try:
