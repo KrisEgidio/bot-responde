@@ -21,18 +21,17 @@ def config_webdriver():
 
 def main():
     driver = config_webdriver()
+    mission_page = MissionPage(driver)
 
     try:
-        # Inicializando Page Objects
-        mission_page = MissionPage(driver)
         mission_page.wait_login()
         mission_page.go_to_available_mission()
         mission_page.solve_mission()
-
     except Exception as e:
-        print(f"Ocorreu um erro durante a execução do bot: {e}")
+        if e:
+            print(e)
     finally:
-        # Encerrando o WebDriver
+        mission_page.get_total_coins()
         driver.quit()
 
 

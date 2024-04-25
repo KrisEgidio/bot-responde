@@ -30,7 +30,6 @@ class SeleniumObject:
         wait = WebDriverWait(self.webdriver, time)
         return wait.until(EC.element_to_be_clickable(locator))
 
-
 class BasePage(SeleniumObject):
     def __init__(self, webdriver):
         self.webdriver = webdriver
